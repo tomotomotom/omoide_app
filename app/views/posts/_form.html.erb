@@ -1,27 +1,31 @@
-<%= form_with(model: post) do |form| %>
+<%= form_with(model: post, local: true, html: { multipart: true }) do |form| %>
   <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4>エラーが発生しました:</h4>
       <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-4">
+    <%= form.label :title, "タイトル", class: "form-label", style: "font-size: 1.3rem;" %>
+    <%= form.text_field :title, class: "form-control form-control-lg", style: "font-size: 1.2rem;" %>
   </div>
 
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
+  <div class="mb-4">
+    <%= form.label :body, "本文", class: "form-label", style: "font-size: 1.3rem;" %>
+    <%= form.text_area :body, rows: 6, class: "form-control", style: "font-size: 1.2rem;" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-4">
+    <%= form.label :image, "写真を添付する", class: "form-label", style: "font-size: 1.3rem;" %>
+    <%= form.file_field :image, class: "form-control", style: "font-size: 1.2rem;" %>
+  </div>
+
+  <div class="text-center mt-5">
+    <%= form.submit "投稿する", class: "btn btn-success btn-lg", style: "font-size: 1.5rem;" %>
   </div>
 <% end %>

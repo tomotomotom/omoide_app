@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0" style="background-color: #fefefe;">
+        <div class="card-body p-5">
+          <h2 class="card-title text-center mb-5" style="font-size: 2.5rem;">新規登録</h2>
+
+          <%= form_with(model: resource, url: registration_path(resource_name), local: true) do |f| %>
+            <% if resource.errors.any? %>
+              <div class="alert alert-danger">
+                <h4>エラーが発生しました:</h4>
+                <ul>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <!-- 名前 -->
+            <div class="mb-4">
+              <%= f.label :name, "名前", class: "form-label", style: "font-size: 1.3rem;" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control form-control-lg", style: "font-size: 1.2rem;" %>
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="mb-4">
+              <%= f.label :email, "メールアドレス", class: "form-label", style: "font-size: 1.3rem;" %>
+              <%= f.email_field :email, autocomplete: "email", class: "form-control form-control-lg", style: "font-size: 1.2rem;" %>
+            </div>
+
+            <!-- パスワード -->
+            <div class="mb-4">
+              <%= f.label :password, "パスワード", class: "form-label", style: "font-size: 1.3rem;" %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg", style: "font-size: 1.2rem;" %>
+            </div>
+
+            <!-- パスワード確認 -->
+            <div class="mb-4">
+              <%= f.label :password_confirmation, "パスワード確認", class: "form-label", style: "font-size: 1.3rem;" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg", style: "font-size: 1.2rem;" %>
+            </div>
+
+            <!-- 登録ボタン -->
+            <div class="text-center mt-5">
+              <%= f.submit "登録する", class: "btn btn-primary btn-lg", style: "font-size: 1.5rem;" %>
+            </div>
+
+          <% end %>
+
+          <div class="text-center mt-4">
+            <%= link_to "ログイン画面に戻る", new_session_path(resource_name), class: "btn btn-outline-secondary btn-lg", style: "font-size: 1.3rem;" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
