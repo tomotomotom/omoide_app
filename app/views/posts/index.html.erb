@@ -24,24 +24,13 @@
                 <%= truncate(post.body, length: 100) %>
               </p>
             </div>
-
             <div class="card-footer text-muted small">
               <span style="font-size: 1.1rem;">
                 投稿者: <%= post.user&.name || "ゲスト" %> ／ <%= post.created_at.strftime("%Y/%m/%d") %>
               </span>
-
-              <% if user_signed_in? %>
-                <div class="text-center mt-2"style="position: relative; z-index: 10;">
-                  <% if current_user.likes.exists?(post: post) %>
-                    <%= button_to "💔 いいね解除", post_like_path(post), method: :delete, data: { turbo: false }, class: "btn btn-outline-danger btn-sm mt-2", style: "font-size: 1.2rem;" %>
-                  <% else %>
-                    <%= button_to "♡ いいね", post_like_path(post), method: :post,data: { turbo: false }, class: "btn btn-outline-primary btn-sm mt-2", style: "font-size: 1.2rem;" %>
-                  <% end %>
-                  <p class="mt-1 mb-0" style="font-size: 1.1rem;">
-                    👍 いいね数: <%= post.likes.count %>
-                  </p>
-                </div>
-              <% end %>
+              <div id="like-container-<%= post.id %>">
+                <%= render "posts/like_buttons", post: post %>
+              </div>
             </div>
           </div>
         </div>

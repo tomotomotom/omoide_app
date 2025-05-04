@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <% if current_user.likes.exists?(post: post) %>
+    <%= link_to "💔 いいね解除", post_like_path(post),
+        method: :delete,
+        remote: true,
+        class: "btn btn-outline-danger btn-sm mt-2 like-toggle",
+        data: { post_id: post.id } %>
+  <% else %>
+    <%= link_to "❤ いいね", post_like_path(post),
+        method: :post,
+        remote: true,
+        data: { turbo: false, post_id: post.id },
+        class: "btn btn-outline-primary btn-sm mt-2 like-toggle",
+        data: { post_id: post.id } %>
+  <% end %>
+  <p class="mt-1 mb-0 like-count" style="font-size: 1.1rem;">
+    👍 いいね数: <%= post.likes.count %>
+  </p>
+<% end %>
